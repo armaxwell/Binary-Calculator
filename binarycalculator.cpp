@@ -118,7 +118,7 @@ string addition(string num1, string num2, unsigned int length1, unsigned int len
 }
 
 string multiplication(string num1, string num2, unsigned int length1, unsigned int length2) {
-    string product = "";
+    string product = "0";
 
     int longest = length1;
     int shortest = length2;
@@ -133,12 +133,23 @@ string multiplication(string num1, string num2, unsigned int length1, unsigned i
     }
 
     unsigned int place = 0;
+    vector<string> sums;
     for (int small = shortest - 1; small >= 0; small--) {
-        if (!getBit(b[small])) {
-            continue;
-        } else {
-
+        string sum = "";
+        if (getBit(b[small])) {
+            for (int i = 0; i < place; i++) {
+                sum = "0" + sum;
+            }
+            sum = a + sum;
         }
+        sums.push_back(sum);
+        place++;
+    }
+
+    for (int j = 0; j < sums.size(); j++) {
+        // cout << sums.at(j) << endl;
+        product = addition(product, sums.at(j), product.length(), sums.at(j).length());
+        // cout << product << endl;
     }
 
     return product;
@@ -194,13 +205,23 @@ int main (int argv, char** argc) {
     switch (sel) {
         case 1:
             if (len1 > MAXADD) {
-                cout << "Error: First number is too big. Only 31 bits maximum per input Try a smaller number." << endl;
+                cout << "Error: First number is too big. Only 31 bits maximum per input for addition. Try a smaller number." << endl;
                 return 1;
             } else if (len2 > MAXADD) {
-                cout << "Error: Second number is too big. Only 31 bits maximum per input Try a smaller number." << endl;
+                cout << "Error: Second number is too big. Only 31 bits maximum per input for addition. Try a smaller number." << endl;
                 return 1;
             }
             result = addition(input1, input2, len1, len2);
+            break;
+        case 3:
+            if (len1 > MAXMUL) {
+                cout << "Error: First number is too big. Only 16 bits maximum per input for multiplication. Try a smaller number." << endl;
+                return 1;
+            } else if (len2 > MAXMUL) {
+                cout << "Error: Second number is too big. Only 16 bits maximum per input for multiplication. Try a smaller number." << endl;
+                return 1;
+            }
+            result = multiplication(input1, input2, len1, len2);
             break;
         default:
             result = "";
