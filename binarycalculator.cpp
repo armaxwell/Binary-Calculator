@@ -138,7 +138,15 @@ string subtraction(string num1, string num2, unsigned int length1, unsigned int 
             
         } else {
             if (getBit(a[big]) < getBit(b[small])) {
-
+                int i = big;
+                while (i >= 0 && getBit(a[i])) {
+                    i--;
+                }
+                char carry = a[i];
+                a[i] = '0';
+                
+            } else {
+                
             }
         }
     }
