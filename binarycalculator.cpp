@@ -59,7 +59,7 @@ string getString(bool bit) {
     return "0";
 }
 
-string addition(string num1, string num2, unsigned int length1, unsigned int length2) {
+string addition(string num1, string num2, unsigned int length1, unsigned int length2) { // addend 1 and addend 2
     string sum = "";
     // 1010101011010101010110 + 11101011101010110111 doesnt work? now it does...what?
     int longest = length1;
@@ -117,6 +117,35 @@ string addition(string num1, string num2, unsigned int length1, unsigned int len
     return sum;
 }
 
+string subtraction(string num1, string num2, unsigned int length1, unsigned int length2) {
+    string difference = "";
+
+    int longest = length1;
+    int shortest = length2;
+    string a = num1;
+    string b = num2;
+
+    if (length2 > length1) {
+        longest = length2;
+        shortest = length1;
+        a = num2;
+        b = num1;
+    }
+
+    for (unsigned int big = longest - 1; big >= 0; big--) {
+        int small = big - (longest - shortest);
+        if (small < 0) {
+            
+        } else {
+            if (getBit(a[big]) < getBit(b[small])) {
+
+            }
+        }
+    }
+
+    return difference;
+}
+
 string multiplication(string num1, string num2, unsigned int length1, unsigned int length2) {
     string product = "0";
 
@@ -153,6 +182,10 @@ string multiplication(string num1, string num2, unsigned int length1, unsigned i
     }
 
     return product;
+}
+
+string division(string num1, string num2, unsigned int length1, unsigned length2) {
+
 }
 
 int main (int argv, char** argc) {
